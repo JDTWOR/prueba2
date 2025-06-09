@@ -88,12 +88,13 @@ public class InterfazSimulador extends JFrame {
     setSize(600, 580);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    cuenta = new SimuladorBancario("50.152.468", "Sergio L�pez");
+        cuenta = new SimuladorBancario( "1.120.561.339", "Jhon Deivid" );
 
-    panelCDT = new PanelCDT(this);
-    panelAhorros = new PanelAhorros(this);
-    panelCorriente = new PanelCorriente(this);
-    panelOpciones = new PanelOpciones(this);
+        panelCDT = new PanelCDT( this );
+        panelAhorros = new PanelAhorros( this );
+
+        panelCorriente = new PanelCorriente( this );
+        panelOpciones = new PanelOpciones( this );
 
     panelSaldos = new PanelSaldos(this);
     panelDatos = new PanelDatosCliente();
@@ -116,13 +117,13 @@ public class InterfazSimulador extends JFrame {
     panelCentral.add(panelDatos, BorderLayout.NORTH);
     panelCentral.add(panelTransacciones, BorderLayout.CENTER);
 
-    panelTransacciones.add(panelAhorros);
-    panelTransacciones.add(panelCorriente);
-    panelTransacciones.add(panelCDT);
-    panelTransacciones.add(panelSaldos);
-
-    setLocationRelativeTo(null);
-    setResizable(false);
+        panelTransacciones.add( panelAhorros );
+        panelTransacciones.add( panelCorriente );
+        panelTransacciones.add( panelCDT );
+        panelTransacciones.add( panelSaldos );
+       
+        setLocationRelativeTo( null );
+        setResizable( true );
 
     actualizar();
   }
@@ -143,39 +144,42 @@ public class InterfazSimulador extends JFrame {
     panelSaldos.actualizarMes(cuenta.darMesActual());
     panelSaldos.actualizarSaldoTotal(formatearValor(cuenta.calcularSaldoTotal()));
 
-    panelCorriente.actualizarSaldoCorriente(formatearValor(cuenta.darCuentaCorriente().darSaldo()));
-    panelAhorros.actualizarSaldoAhorros(formatearValor(cuenta.darCuentaAhorros().darSaldo()) + "   ["
-        + (cuenta.darCuentaAhorros().darInteresMensual() * 100) + "%]");
-    panelCDT.actualizarSaldoCDT(formatearValor(cuenta.darCDT().calcularValorPresente(cuenta.darMesActual())) + "   ["
-        + (cuenta.darCDT().darInteresMensual() * 100) + "%]");
+        panelCorriente.actualizarSaldoCorriente( formatearValor( cuenta.darCuentaCorriente( ).darSaldo( ) ) );
+        panelAhorros.actualizarSaldoAhorros( formatearValor( cuenta.darCuentaAhorros( ).darSaldo( ) ), ( cuenta.darCuentaAhorros( ).darInteresMensual( ) * 100 ) + "%" );
+        panelCDT.actualizarSaldoCDT( formatearValor( cuenta.darCDT( ).calcularValorPresente( cuenta.darMesActual( ) ) ), ( cuenta.darCDT( ).darInteresMensual( ) * 100 ) + "%" );
 
   }
 
-  /**
-   * Invierte un monto de dinero en un CDT. <br>
-   * <b>post: </b> Se realiz� la inversi�n en un CDT.
-   * 
-   * @param pMonto   Monto de dinero a invertir en el CDT.
-   * @param pInteres Valor de los intereses en porcentaje.
-   */
-  public void invertirCDT(String pMonto, String pInteres) {
-    if (pMonto != null) {
-      try {
-        int monto = Integer.parseInt(pMonto);
-        double interes = Double.parseDouble(pInteres);
-        if (monto > 0 && interes > 0) {
-          cuenta.invertirCDT(monto, interes / 100);
-          actualizar();
-        } else {
-          JOptionPane.showMessageDialog(this, "Debe  ingresar valores positivos.", "Invertir en CDT",
-              JOptionPane.ERROR_MESSAGE);
+    /**
+     * Invierte un monto de dinero en un CDT. <br>
+     * <b>post: </b> Se realiz� la inversi�n en un CDT.
+     * @param pMonto Monto de dinero a invertir en el CDT.
+     * @param pInteres Valor de los intereses en porcentaje.
+     */
+    public void invertirCDT( String pMonto, String pInteres )
+    {
+        if( pMonto != null )
+        {
+            try
+            {
+                int monto = Integer.parseInt( pMonto );
+                double interes = Double.parseDouble( pInteres );
+                if( monto > 0 && interes > 0 )
+                {
+                    cuenta.invertirCDT( monto, interes / 100 );
+                    actualizar();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog( this, "Debe  ingresar valores positivos.", "Invertir en CDT", JOptionPane.ERROR_MESSAGE );
+                }
+            }
+            catch( Exception e )
+            {
+                JOptionPane.showMessageDialog( this, "Se ingreso un monto de dinero o interes invalido.", "Invertir en CDT", JOptionPane.ERROR_MESSAGE );
+            }
         }
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Se ingres� un monto de dinero o inter�s inv�lido.", "Invertir en CDT",
-            JOptionPane.ERROR_MESSAGE);
-      }
     }
-  }
 
   /**
    * Cierra el CDT del cliente. <br>
@@ -201,13 +205,16 @@ public class InterfazSimulador extends JFrame {
       } else if (monto > cuenta.darCuentaAhorros().darSaldo()) {
         JOptionPane.showMessageDialog(this, "No tiene saldo suficente.", "Retirar", JOptionPane.ERROR_MESSAGE);
 
-      } else {
-        cuenta.retirarCuentaAhorros(monto);
-        actualizar();
-      }
-    } catch (Exception e) {
-      JOptionPane.showMessageDialog(this, "Se ingres� un monto de dinero inv�lido.", "Retirar",
-          JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                cuenta.retirarCuentaAhorros( monto );
+                actualizar( );
+            }
+        }
+        catch( Exception e )
+        {
+            JOptionPane.showMessageDialog( this, "Se ingreso un monto de dinero invalido.", "Retirar", JOptionPane.ERROR_MESSAGE );
 
     }
   }
@@ -320,14 +327,85 @@ public class InterfazSimulador extends JFrame {
     JOptionPane.showMessageDialog(this, respuesta, "Respuesta.", JOptionPane.INFORMATION_MESSAGE);
   }
 
-  /**
-   * M�todo para la extensi�n 2.
-   */
-  public void reqFuncOpcion2() {
-    String respuesta = cuenta.metodo2();
-    actualizar();
-    JOptionPane.showMessageDialog(this, respuesta, "Respuesta.", JOptionPane.INFORMATION_MESSAGE);
-  }
+    /**
+     * M�todo para la extensi�n 2.
+     */
+    public void reqFuncOpcion2( )
+    {
+        String respuesta = cuenta.metodo2( );
+        actualizar( );
+        JOptionPane.showMessageDialog( this, respuesta, "Respuesta.", JOptionPane.INFORMATION_MESSAGE );
+    }
+
+    // -----------------------------------------------------------------
+    // Métodos para mostrar resumen de transacciones
+    // -----------------------------------------------------------------
+
+    /**
+     * Muestra el resumen de transacciones de la cuenta de ahorros del mes actual.
+     */
+    public void mostrarResumenAhorros() {
+        String resumen = cuenta.resumenTransaccionesAhorros();
+        JOptionPane.showMessageDialog(this, resumen, "Resumen transacciones Ahorros (Mes " + cuenta.darMesActual() + ")", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Muestra el resumen de transacciones de la cuenta corriente del mes actual.
+     */
+    public void mostrarResumenCorriente() {
+        String resumen = cuenta.resumenTransaccionesCorriente();
+        JOptionPane.showMessageDialog(this, resumen, "Resumen transacciones Corriente (Mes " + cuenta.darMesActual() + ")", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    /**
+     * Muestra el resumen de transacciones del CDT del mes actual.
+     */
+    public void mostrarResumenCDT() {
+        String resumen = cuenta.resumenTransaccionesCDT();
+        JOptionPane.showMessageDialog(this, resumen, "Resumen transacciones CDT (Mes " + cuenta.darMesActual() + ")", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public String resumenTransaccionesAhorros() {
+        return cuenta.resumenTransaccionesAhorros();
+    }
+
+    public String resumenTransaccionesCorriente() {
+        return cuenta.resumenTransaccionesCorriente();
+    }
+
+    public String resumenTransaccionesCDT() {
+        return cuenta.resumenTransaccionesCDT();
+    }
+
+    public int darMesActual() {
+        return cuenta.darMesActual();
+    }
+
+    /**
+     * Calcula y muestra el saldo promedio de la cuenta de ahorros entre el mes actual y el mes ingresado.
+     * @param mesFin Mes futuro (1-indexado).
+     */
+    public void mostrarSaldoPromedioAhorros(int mesFin) {
+        double promedio = cuenta.saldoPromedioAhorros(mesFin);
+        if (promedio == -1) {
+            JOptionPane.showMessageDialog(this, "El mes ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "El saldo promedio de ahorros es: " + formatearValor(promedio), "Promedio Ahorros", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    /**
+     * Calcula y muestra el saldo promedio del CDT entre el mes actual y el mes ingresado.
+     * @param mesFin Mes futuro (1-indexado).
+     */
+    public void mostrarSaldoPromedioCDT(int mesFin) {
+        double promedio = cuenta.saldoPromedioCDT(mesFin);
+        if (promedio == -1) {
+            JOptionPane.showMessageDialog(this, "El mes ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "El saldo promedio de CDT es: " + formatearValor(promedio), "Promedio CDT", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 
   // -----------------------------------------------------------------
   // Main

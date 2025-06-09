@@ -112,6 +112,10 @@ public class PanelAhorros extends JPanel implements ActionListener
         txtInteresAhorros = new JTextField( 14 );
         txtInteresAhorros.setEditable( false );
 
+        etiquetaInteresAhorros = new JLabel( "Interes al mes: " );
+        txtInteresAhorros = new JTextField( 14 );
+        txtInteresAhorros.setEditable( false );
+
         btnConsignarCuentaAhorro = new JButton( "Consignar" );
         btnConsignarCuentaAhorro.setActionCommand( CONSIGNAR_CUENTA_AHORRO );
         btnConsignarCuentaAhorro.addActionListener( this );
@@ -125,6 +129,7 @@ public class PanelAhorros extends JPanel implements ActionListener
         JPanel panelInfo = new JPanel( );
         JPanel panelBotones = new JPanel( );
         panelInfo.setLayout( new GridLayout( 2, 2, 2, 2 ) );
+        panelInfo.setLayout( new GridLayout( 2, 2, 2, 2 ) );
         panelInfo.setBorder( new EmptyBorder( 0, 0, 5, 0 ) );
         panelBotones.setLayout( new BorderLayout( ) );
         panelBotones.setBorder( new EmptyBorder( 0, 5, 5, 5 ) );
@@ -133,6 +138,8 @@ public class PanelAhorros extends JPanel implements ActionListener
         // Ubica los elementos en el panel
         panelInfo.add( etiquetaSaldoAhorros );
         panelInfo.add( txtSaldoAhorros );
+        panelInfo.add( etiquetaInteresAhorros );
+        panelInfo.add( txtInteresAhorros );
         panelInfo.add( etiquetaInteresAhorros );
         panelInfo.add( txtInteresAhorros );
         panelBotones.add( btnConsignarCuentaAhorro, BorderLayout.WEST );
@@ -154,9 +161,10 @@ public class PanelAhorros extends JPanel implements ActionListener
      * <b>post: </b> Se actualiz� la informaci�n con el saldo de la cuenta de ahorros.
      * @param pSaldo Saldo en la cuenta de ahorros del cliente. pSaldo != null.
      */
-    public void actualizarSaldoAhorros( String pSaldo )
+    public void actualizarSaldoAhorros( String pSaldo, String pInteres )
     {
         txtSaldoAhorros.setText( pSaldo );
+        txtInteresAhorros.setText( pInteres);
     }
 
     /**
