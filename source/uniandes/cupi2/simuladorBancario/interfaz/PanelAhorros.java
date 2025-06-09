@@ -1,6 +1,6 @@
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Universidad de los Andes (Bogotá - Colombia)
- * Departamento de Ingeniería de Sistemas y Computación 
+ * Universidad de los Andes (Bogotï¿½ - Colombia)
+ * Departamento de Ingenierï¿½a de Sistemas y Computaciï¿½n 
  * Licenciado bajo el esquema Academic Free License version 2.1 
  *
  * Proyecto Cupi2 (http://cupi2.uniandes.edu.co)
@@ -26,7 +26,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Panel con las opciones de la aplicación.
+ * Panel con las opciones de la aplicaciï¿½n.
  */
 @SuppressWarnings("serial")
 public class PanelAhorros extends JPanel implements ActionListener
@@ -70,7 +70,17 @@ public class PanelAhorros extends JPanel implements ActionListener
     private JTextField txtSaldoAhorros;
 
     /**
-     * Boton para consignar en la cuenta de ahorros.
+     * Etiqueta del interÃ©s de la cuenta de ahorros.
+     */
+    private JLabel etiquetaInteresAhorros;
+
+    /**
+     * Campo donde se visualiza el interÃ©s de la cuenta de ahorros.
+     */
+    private JTextField txtInteresAhorros;
+
+    /**
+     * BotÃ³n para consignar en la cuenta de ahorros.
      */
     private JButton btnConsignarCuentaAhorro;
 
@@ -85,8 +95,8 @@ public class PanelAhorros extends JPanel implements ActionListener
 
     /**
      * Crea un nuevo panel e inicializa sus elementos. <br>
-     * <b>post: </b> Se inicializó el panel.
-     * @param pPrincipal Ventana principal de la aplicación. pPrincipal != null.
+     * <b>post: </b> Se inicializï¿½ el panel.
+     * @param pPrincipal Ventana principal de la aplicaciï¿½n. pPrincipal != null.
      */
     public PanelAhorros( InterfazSimulador pPrincipal )
     {
@@ -97,6 +107,10 @@ public class PanelAhorros extends JPanel implements ActionListener
         etiquetaSaldoAhorros = new JLabel( "Saldo ahorros: " );
         txtSaldoAhorros = new JTextField( 14 );
         txtSaldoAhorros.setEditable( false );
+
+        etiquetaInteresAhorros = new JLabel( "Interes al mes: " );
+        txtInteresAhorros = new JTextField( 14 );
+        txtInteresAhorros.setEditable( false );
 
         btnConsignarCuentaAhorro = new JButton( "Consignar" );
         btnConsignarCuentaAhorro.setActionCommand( CONSIGNAR_CUENTA_AHORRO );
@@ -110,7 +124,7 @@ public class PanelAhorros extends JPanel implements ActionListener
 
         JPanel panelInfo = new JPanel( );
         JPanel panelBotones = new JPanel( );
-        panelInfo.setLayout( new GridLayout( 1, 2 ) );
+        panelInfo.setLayout( new GridLayout( 2, 2, 2, 2 ) );
         panelInfo.setBorder( new EmptyBorder( 0, 0, 5, 0 ) );
         panelBotones.setLayout( new BorderLayout( ) );
         panelBotones.setBorder( new EmptyBorder( 0, 5, 5, 5 ) );
@@ -119,6 +133,8 @@ public class PanelAhorros extends JPanel implements ActionListener
         // Ubica los elementos en el panel
         panelInfo.add( etiquetaSaldoAhorros );
         panelInfo.add( txtSaldoAhorros );
+        panelInfo.add( etiquetaInteresAhorros );
+        panelInfo.add( txtInteresAhorros );
         panelBotones.add( btnConsignarCuentaAhorro, BorderLayout.WEST );
         panelBotones.add( new JLabel( " " ), BorderLayout.CENTER );
         panelBotones.add( btnRetirarCuentaAhorro, BorderLayout.EAST );
@@ -130,12 +146,12 @@ public class PanelAhorros extends JPanel implements ActionListener
     }
 
     // -----------------------------------------------------------------
-    // Métodos
+    // Mï¿½todos
     // -----------------------------------------------------------------
 
     /**
      * Actualiza el saldo de la cuenta de ahorros del cliente en la interfaz. <br>
-     * <b>post: </b> Se actualizó la información con el saldo de la cuenta de ahorros.
+     * <b>post: </b> Se actualizï¿½ la informaciï¿½n con el saldo de la cuenta de ahorros.
      * @param pSaldo Saldo en la cuenta de ahorros del cliente. pSaldo != null.
      */
     public void actualizarSaldoAhorros( String pSaldo )
@@ -145,7 +161,7 @@ public class PanelAhorros extends JPanel implements ActionListener
 
     /**
      * Manejo de los eventos de los botones.
-     * @param pEvento Evento de click sobre un botón. pEvento != null.
+     * @param pEvento Evento de click sobre un botï¿½n. pEvento != null.
      */
     public void actionPerformed( ActionEvent pEvento )
     {
@@ -163,7 +179,6 @@ public class PanelAhorros extends JPanel implements ActionListener
                 principal.retirarAhorros( strValor );
         }
 
-     
 
     }
 
